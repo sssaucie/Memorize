@@ -52,8 +52,10 @@
 		9682C9B0268BA69700476C1D /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				9682C9C2268BAA5900476C1D /* model */,
+				9682C9C1268BAA5200476C1D /* viewModel */,
+				9682C9C0268BAA4600476C1D /* view */,
 				9682C9B1268BA69700476C1D /* MemorizeApp.swift */,
-				9682C9B3268BA69700476C1D /* ContentView.swift */,
 				9682C9B5268BA69800476C1D /* Assets.xcassets */,
 				9682C9BA268BA69800476C1D /* Info.plist */,
 				9682C9B7268BA69800476C1D /* Preview Content */,
@@ -67,6 +69,28 @@
 				9682C9B8268BA69800476C1D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9682C9C0268BAA4600476C1D /* view */ = {
+			isa = PBXGroup;
+			children = (
+				9682C9B3268BA69700476C1D /* ContentView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		9682C9C1268BAA5200476C1D /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		9682C9C2268BAA5900476C1D /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
