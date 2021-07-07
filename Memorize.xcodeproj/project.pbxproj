@@ -15,6 +15,7 @@
 		9682C9B9268BA69800476C1D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9682C9B8268BA69800476C1D /* Preview Assets.xcassets */; };
 		96846E6B26960638006C12DC /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96846E6A26960638006C12DC /* AspectVGrid.swift */; };
 		96C94B6F269618C800BAC289 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C94B6E269618C800BAC289 /* Pie.swift */; };
+		96C94B7126961DB200BAC289 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C94B7026961DB200BAC289 /* Cardify.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9682C9BA268BA69800476C1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96846E6A26960638006C12DC /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AspectVGrid.swift; path = Memorize/view/AspectVGrid.swift; sourceTree = SOURCE_ROOT; };
 		96C94B6E269618C800BAC289 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
+		96C94B7026961DB200BAC289 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				96C94B6E269618C800BAC289 /* Pie.swift */,
 				96846E6A26960638006C12DC /* AspectVGrid.swift */,
 				9682C9B3268BA69700476C1D /* EmojiMemoryGameView.swift */,
+				96C94B7026961DB200BAC289 /* Cardify.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96C94B6F269618C800BAC289 /* Pie.swift in Sources */,
+				96C94B7126961DB200BAC289 /* Cardify.swift in Sources */,
 				967956772693DEAA003A861F /* MemoryGame.swift in Sources */,
 				9682C9B4268BA69700476C1D /* EmojiMemoryGameView.swift in Sources */,
 				9682C9B2268BA69700476C1D /* MemorizeApp.swift in Sources */,
