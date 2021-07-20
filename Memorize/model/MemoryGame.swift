@@ -113,40 +113,6 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             self.lastFaceUpDate = nil
         }
     }
-    
-    struct MemoryGameTheme {
-        
-        enum EmojiOption {
-            case Animals
-            case Clothing
-            case Faces
-            case Food
-            case Halloween
-            case Holidays
-            case Household
-            case Ocean
-            case Sports
-        }
-        
-        func emojiAssignments() {
-            let _: [EmojiOption: String] = [
-                .Animals: ("🐶", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ),
-                .Clothing: ("")
-            ]
-        }
-    }
-    
-    private struct MemoryGameConstants {
-        static let animalEmojis: Array = [ "🐶", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-        static let clothingEmojis = []
-        static let facesEmojis = ["🤩", "🥳", "🥸", "🥱", "😶‍🌫️", "🥶", "🤗", "🤠", "🥰", "😇", "🤯", "😍", "🤬", "🤐", "😷", "😎", "😆", "😜", "🥺", "😳", "😏", "😤", "😱", "🤣"]
-        static let foodEmojis = [ ]
-        static let halloweenEmojis = [ ]
-        static let holidaysEmojis = [ ]
-        static let householdEmojis = [ ]
-        static let oceanEmojis = [ ]
-        static let sportsEmojis = [ ]
-    }
 }
 
 extension Array {

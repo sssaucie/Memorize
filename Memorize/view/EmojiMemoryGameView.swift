@@ -16,6 +16,10 @@ struct EmojiMemoryGameView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             VStack {
+                HStack(alignment: .top) {
+                    scoreText
+                    scoreAmount
+                }
                 gameBody
                 HStack {
                     newGame
@@ -68,7 +72,7 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(.red)
+        .foregroundColor(CardConstants.color)
     }
     
     var deckBody: some View {
@@ -107,6 +111,14 @@ struct EmojiMemoryGameView: View {
                 gameViewModel.restart()
             }
         }
+    }
+    
+    var scoreText: some View {
+        Text("Score: ")
+    }
+    
+    var scoreAmount: some View {
+        Text("ScoreGoesHere")
     }
     
     private struct CardConstants {
