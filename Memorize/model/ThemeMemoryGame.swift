@@ -7,21 +7,9 @@
 
 import Foundation
 
-struct ThemeMemoryGame {
-    
-    enum CardColor: String {
-        
-        case grey = "grey",
-             blue = "blue",
-             red = "red",
-             orange = "orange",
-             purple = "purple",
-             green = "green",
-             black = "black",
-             pink = "pink",
-             yellow = "yellow",
-             brown = "brown",
-             teal = "teal",
-             ivory = "ivory"
-    }
+struct ThemeMemoryGame<CardContent> {
+    var numPairsOfCards: Int
+    var name: String
+    var color: String
+    var content: Array<String>
 }

@@ -11,36 +11,17 @@ class EmojiMemoryGame: ObservableObject {
     
     typealias Card = MemoryGame<String>.Card
         
-    private static let emojis = EmojiConstants.facesEmojis
+    private static var randomTheme = ThemeOptions.themeOptions.values.randomElement()
     
-    private enum EmojiChoices: CGFloat {
-        case animal, clothing, faces, food, holidays, household, ocean, sports
-        
-        func getValue() -> Array<String> {
-            switch self {
-            case .animal:
-                return EmojiConstants.animalEmojis
-            case .clothing:
-                return EmojiConstants.clothingEmojis
-            case .faces:
-                return EmojiConstants.facesEmojis
-            case .food:
-                return EmojiConstants.foodEmojis
-            case .holidays:
-                return EmojiConstants.holidaysEmojis
-            case .household:
-                return EmojiConstants.householdEmojis
-            case .ocean:
-                return EmojiConstants.oceanEmojis
-            case .sports:
-                return EmojiConstants.sportsEmojis
-            }
-        }
-    }
+    private static let content = randomTheme!.content
+    
+    private static let numOfPairsOfCards = randomTheme!.numPairsOfCards
+    
+    let themeColor = randomTheme!.color
     
     private static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 6) { pairIndex in
-            emojis[pairIndex] }
+        MemoryGame<String>(numberOfPairsOfCards: numOfPairsOfCards) { pairIndex in
+            content[pairIndex] }
     }
     
     @Published private var model = createMemoryGame()
@@ -57,9 +38,11 @@ class EmojiMemoryGame: ObservableObject {
     
     func shuffle() {
         model.shuffle()
+        EmojiMemoryGame.randomTheme
     }
     
     func restart() {
         model = EmojiMemoryGame.createMemoryGame()
+        EmojiMemoryGame.randomTheme
     }
 }
