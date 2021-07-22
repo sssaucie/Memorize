@@ -7,9 +7,16 @@
 
 import Foundation
 
-struct ThemeMemoryGame<CardContent> {
-    var numPairsOfCards: Int
+struct ThemeMemoryGame {
     var name: String
-    var color: String
     var content: Array<String>
+    var numPairsOfCards: Int
+    var color: String
+    
+    init(name: String, content: Array<String>, numPairsOfCards: Int, color: String) {
+        self.name = name
+        self.content = content
+        self.numPairsOfCards = numPairsOfCards > content.count ? content.count : numPairsOfCards
+        self.color = color
+    }
 }

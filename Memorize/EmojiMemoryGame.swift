@@ -9,25 +9,38 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     
-    typealias Card = MemoryGame<String>.Card
-        
-    private static var randomTheme = ThemeOptions.themeOptions.values.randomElement()
-    
-    private static let content = randomTheme!.content
-    
-    private static let numOfPairsOfCards = randomTheme!.numPairsOfCards
-    
-    let themeColor = randomTheme!.color
-    
-    private static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: numOfPairsOfCards) { pairIndex in
-            content[pairIndex] }
+    init() {
+        theme = ThemeOptions.themeOptions.randomElement()!
+        theme.content.shuffle()
+        model = EmojiMemoryGame.createMemoryGame(theme: theme)
     }
     
-    @Published private var model = createMemoryGame()
+    typealias Card = MemoryGame<String>.Card
+    
+    private static func createMemoryGame(theme: ThemeMemoryGame) -> MemoryGame<String> {
+        MemoryGame<String>(numberOfPairsOfCards: theme.numPairsOfCards) { pairIndex in
+            return theme.content[pairIndex]
+        }
+    }
+    
+    @Published private var model: MemoryGame<String>
+    
+    private var theme: ThemeMemoryGame
+    
+    var themeName: String {
+        return theme.name
+    }
+    
+    var themeColor: String {
+        return theme.color
+    }
     
     var cards: Array<Card> {
         model.cards
+    }
+    
+    var score: Int {
+        return model.score
     }
     
     // MARK: - Intent(s)
@@ -38,11 +51,11 @@ class EmojiMemoryGame: ObservableObject {
     
     func shuffle() {
         model.shuffle()
-        EmojiMemoryGame.randomTheme
     }
     
     func restart() {
-        model = EmojiMemoryGame.createMemoryGame()
-        EmojiMemoryGame.randomTheme
+        theme = ThemeOptions.themeOptions.randomElement()!
+        theme.content.shuffle()
+        model = EmojiMemoryGame.createMemoryGame(theme: theme)
     }
 }

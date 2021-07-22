@@ -8,14 +8,14 @@
 import Foundation
 
 struct ThemeOptions {
-    static let themeOptions: [Int: ThemeMemoryGame<String>] =
+    static var themeOptions: Array<ThemeMemoryGame> =
     [
-        0: ThemeMemoryGame(numPairsOfCards: 10, name: ThemeName.animals, color: ThemeColors.green, content: EmojiConstants.animalEmojis),
-        1: ThemeMemoryGame(numPairsOfCards: 8, name: ThemeName.clothing, color: ThemeColors.teal, content: EmojiConstants.clothingEmojis),
-        2: ThemeMemoryGame(numPairsOfCards: 10, name: ThemeName.faces, color: ThemeColors.orange, content: EmojiConstants.facesEmojis),
-        3: ThemeMemoryGame(numPairsOfCards: 8, name: ThemeName.food, color: ThemeColors.purple, content: EmojiConstants.foodEmojis),
-        4: ThemeMemoryGame(numPairsOfCards: 7, name: ThemeName.holidays, color: ThemeColors.red, content: EmojiConstants.holidaysEmojis),
-        5: ThemeMemoryGame(numPairsOfCards: 10, name: ThemeName.household, color: ThemeColors.periwinkle, content: EmojiConstants.householdEmojis),
-        6: ThemeMemoryGame(numPairsOfCards: 10, name: ThemeName.ocean, color: ThemeColors.royalBlue, content: EmojiConstants.oceanEmojis),
+        ThemeMemoryGame(name: ThemeName.animals, content: EmojiConstants.animalEmojis, numPairsOfCards: 10, color: ThemeColors.green),
+        ThemeMemoryGame(name: ThemeName.clothing, content: EmojiConstants.clothingEmojis, numPairsOfCards: 8, color: ThemeColors.teal),
+        ThemeMemoryGame(name: ThemeName.faces, content: EmojiConstants.facesEmojis, numPairsOfCards: 10, color: ThemeColors.orange),
+        ThemeMemoryGame(name: ThemeName.food, content: EmojiConstants.foodEmojis, numPairsOfCards: 8, color: ThemeColors.purple),
+        ThemeMemoryGame(name: ThemeName.holidays, content: EmojiConstants.holidaysEmojis, numPairsOfCards: 6, color: ThemeColors.red),
+        ThemeMemoryGame(name: ThemeName.household, content: EmojiConstants.householdEmojis, numPairsOfCards: 10, color: ThemeColors.periwinkle),
+        ThemeMemoryGame(name: ThemeName.ocean, content: EmojiConstants.oceanEmojis, numPairsOfCards: 10, color: ThemeColors.royalBlue)
     ]
 }
