@@ -75,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				96EE2F1326A722C600F91F5D /* Constants */,
-				96C94B6D269617A300BAC289 /* customFiles */,
 				9682C9C2268BAA5900476C1D /* model */,
 				9682C9C1268BAA5200476C1D /* viewModel */,
 				9682C9C0268BAA4600476C1D /* view */,
@@ -123,13 +122,6 @@
 				96EE2F1726A72D8600F91F5D /* ThemeMemoryGame.swift */,
 			);
 			path = model;
-			sourceTree = "<group>";
-		};
-		96C94B6D269617A300BAC289 /* customFiles */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = customFiles;
 			sourceTree = "<group>";
 		};
 		96EE2F1326A722C600F91F5D /* Constants */ = {

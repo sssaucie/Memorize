@@ -9,6 +9,11 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     
+//    private func save(to file: File) {
+//        let data: Data = emojiCollections.json()
+//        data.write(to: file)
+//    }
+    
     init() {
         theme = ThemeOptions.themeOptions.randomElement()!
         theme.content.shuffle()

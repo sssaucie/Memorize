@@ -9,6 +9,7 @@ import SwiftUI
 
 // Props to Stefan on stackoverflow for this code
 
+// Use RGBA Color provided by Stanford class instructor Paul H.
 extension Color {
     init(hex string: String) {
         var string: String = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

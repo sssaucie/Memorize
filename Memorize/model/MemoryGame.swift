@@ -7,6 +7,7 @@
 
 import Foundation
 
+// How to add Codable
 struct MemoryGame<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     private(set) var score = 0
@@ -60,6 +61,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
         cards.shuffle()
     }
+    
+//    func json() -> File {
+//        return JSONEncoder().encode(self)
+//    }
     
     struct Card: Identifiable {
         var isFaceUp = false {
