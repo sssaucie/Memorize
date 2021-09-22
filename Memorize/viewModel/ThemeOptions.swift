@@ -7,80 +7,70 @@
 
 import Foundation
 
-struct Palette: Identifiable, Codable, Hashable {
-    var name: String
-    var emojis: String
-    var id: Int
-    
-    fileprivate init(name: String, emojis: String, id: Int) {
-        self.name = name
-        self.emojis = emojis
-        self.id = id
-    }
-}
-
-class PaletteStore: ObservableObject {
+class ThemeStore: ObservableObject {
     let name: String
     
-    @Published var palettes = [Palette]() {
+    @Published var themes = [Theme]() {
         didSet {
             storeInUserDefaults()
         }
     }
     
     private var userDefaultsKey: String {
-        "PaletteStore:" + name
+        "ThemeStore:" + name
     }
     
     private func storeInUserDefaults() {
-        UserDefaults.standard.set(try? JSONEncoder().encode(palettes), forKey: userDefaultsKey)
+        UserDefaults.standard.set(try? JSONEncoder().encode(themes), forKey: userDefaultsKey)
     }
     
     // array of themes of card content
     
     private func restoreFromUserDefaults() {
         if let jsonData = UserDefaults.standard.data(forKey: userDefaultsKey),
-           let decodedPalettes = try? JSONDecoder().decode(Array<Palette>.self, from: jsonData) {
-            palettes = decodedPalettes
+           let decodedThemes = try? JSONDecoder().decode(Array<Theme>.self, from: jsonData) {
+            themes = decodedThemes
         }
     }
     
     init(named name: String) {
         self.name = name
         restoreFromUserDefaults()
-        if palettes.isEmpty {
-            insertPalette(named: "Vehicles", emojis: "🚙🚗🚘🚕🚖🏎🚚🛻🚛🚐🚓🚔🚑🚒🚀✈️🛫🛬🛩🚁🛸🚲🏍🛶⛵️🚤🛥🛳⛴🚢🚂🚝🚅🚆🚊🚉🚇🛺🚜")
-            insertPalette(named: "Sports", emojis: "🏈⚾️🏀⚽️🎾🏐🥏🏓⛳️🥅🥌🏂⛷🎳")
-            insertPalette(named: "Music", emojis: "🎼🎤🎹🪘🥁🎺🪗🪕🎻")
-            insertPalette(named: "Animals", emojis: "🐥🐣🐂🐄🐎🐖🐏🐑🦙🐐🐓🐁🐀🐒🦆🦅🦉🦇🐢🐍🦎🦖🦕🐅🐆🦓🦍🦧🦣🐘🦛🦏🐪🐫🦒🦘🦬🐃🦙🐐🦌🐕🐩🦮🐈🦤🦢🦩🕊🦝🦨🦡🦫🦦🦥🐿🦔")
-            insertPalette(named: "Animal Faces", emojis: "🐵🙈🙊🙉🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄️🐨🐯🦁🐮🐷🐸🐲")
-            insertPalette(named: "Flora", emojis: "🌲🌴🌿☘️🍀🍁🍄🌾💐🌷🌹🥀🌺🌸🌼🌻")
-            insertPalette(named: "Weather", emojis: "☀️🌤⛅️🌥☁️🌦🌧⛈🌩🌨❄️💨☔️💧💦🌊☂️🌫🌪")
-            insertPalette(named: "COVID", emojis: "💉🦠😷🤧🤒")
-            insertPalette(named: "Faces", emojis: "😀😃😄😁😆😅😂🤣🥲☺️😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎🥸🤩🥳😏😞😔😟😕🙁☹️😣😖😫😩🥺😢😭😤😠😡🤯😳🥶😥😓🤗🤔🤭🤫🤥😬🙄😯😧🥱😴🤮😷🤧🤒🤠")
+        if themes.isEmpty {
+            // ASK BRAD
+            insertTheme(named: "Vehicles", content: "🚙🚗🚘🚕🚖🏎🚚🛻🚛🚐🚓🚔🚑🚒🚀✈️🛫🛬🛩🚁🛸🚲🏍🛶⛵️🚤🛥🛳⛴🚢🚂🚝🚅🚆🚊🚉🚇🛺🚜", numPairsOfCards: <#T##Int#>, color: ThemeColors.royalBlue)
+            insertTheme(named: "Sports", content: "🏈⚾️🏀⚽️🎾🏐🥏🏓⛳️🥅🥌🏂⛷🎳", numPairsOfCards: 14, color: ThemeColors.red)
+            insertTheme(named: "Music", content: "🎼🎤🎹🪘🥁🎺🪗🪕🎻", numPairsOfCards: 12, color: ThemeColors.purple)
+            insertTheme(named: "Animals", content: "🐥🐣🐂🐄🐎🐖🐏🐑🦙🐐🐓🐁🐀🐒🦆🦅🦉🦇🐢🐍🦎🦖🦕🐅🐆🦓🦍🦧🦣🐘🦛🦏🐪🐫🦒🦘🦬🐃🦙🐐🦌🐕🐩🦮🐈🦤🦢🦩🕊🦝🦨🦡🦫🦦🦥🐿🦔", numPairsOfCards: <#T##Int#>, color: ThemeColors.green)
+            insertTheme(named: "Animal Faces", content: "🐵🙈🙊🙉🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄️🐨🐯🦁🐮🐷🐸🐲", numPairsOfCards: <#T##Int#>, color: ThemeColors.teal)
+            insertTheme(named: "Flora", content: "🌲🌴🌿☘️🍀🍁🍄🌾💐🌷🌹🥀🌺🌸🌼🌻", numPairsOfCards: <#T##Int#>, color: ThemeColors.periwinkle)
+            insertTheme(named: "Weather", content: "☀️🌤⛅️🌥☁️🌦🌧⛈🌩🌨❄️💨☔️💧💦🌊☂️🌫🌪", numPairsOfCards: <#T##Int#>, color: ThemeColors.yellow)
+            insertTheme(named: "COVID", content: "💉🦠😷🤧🤒", numPairsOfCards: 3, color: ThemeColors.orange)
+            insertTheme(named: "Faces", content: "😀😃😄😁😆😅😂🤣🥲☺️😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎🥸🤩🥳😏😞😔😟😕🙁☹️😣😖😫😩🥺😢😭😤😠😡🤯😳🥶😥😓🤗🤔🤭🤫🤥😬🙄😯😧🥱😴🤮😷🤧🤒🤠", numPairsOfCards: <#T##Int#>, color: ThemeColors.royalBlue)
         }
     }
     
     // MARK: - Intent
     
-    func palette(at index: Int) -> Palette {
-        let safeIndex = min(max(index, 0), palettes.count - 1)
-        return palettes[safeIndex]
+    func theme(at index: Int) -> Theme {
+        let safeIndex = min(max(index, 0), themes.count - 1)
+        return themes[safeIndex]
     }
     
     @discardableResult
-    func removePalette(at index: Int) -> Int {
-        if palettes.count > 1, palettes.indices.contains(index) {
-            palettes.remove(at: index)
+    func removeTheme(at index: Int) -> Int {
+        if themes.count > 1, themes.indices.contains(index) {
+            themes.remove(at: index)
         }
-        return index % palettes.count
+        return index % themes.count
     }
     
-    func insertPalette(named name: String, emojis: String? = nil, at index: Int = 0) {
-        let unique = (palettes.max(by: { $0.id < $1.id })?.id ?? 0) + 1
-        let palette = Palette(name: name, emojis: emojis ?? "", id: unique)
-        let safeIndex = min(max(index, 0), palettes.count)
-        palettes.insert(palette, at: safeIndex)
+    func insertTheme(named name: String, content: String? = nil, numPairsOfCards: Int, color: String, at index: Int = 0) {
+        let unique = (themes.max(by: { $0.id < $1.id })?.id ?? 0) + 1
+        // ASK BRAD
+        let theme = Theme(name: name, content: content!, numPairsOfCards: numPairsOfCards, color: color, id: unique)
+        let safeIndex = min(max(index, 0), themes.count)
+        themes.insert(theme, at: safeIndex)
     }
 }
 

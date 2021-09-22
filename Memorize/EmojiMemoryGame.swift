@@ -14,15 +14,14 @@ class EmojiMemoryGame: ObservableObject {
 //        data.write(to: file)
 //    }
     
-    init() {
-        theme = ThemeOptions.themeOptions.randomElement()!
-        theme.content.shuffle()
+    init(theme: Theme) {
+        theme = ThemeOptions.themeOptions
         model = EmojiMemoryGame.createMemoryGame(theme: theme)
     }
     
     typealias Card = MemoryGame<String>.Card
     
-    private static func createMemoryGame(theme: ThemeMemoryGame) -> MemoryGame<String> {
+    private static func createMemoryGame(theme: Theme) -> MemoryGame<String> {
         MemoryGame<String>(numberOfPairsOfCards: theme.numPairsOfCards) { pairIndex in
             return theme.content[pairIndex]
         }
@@ -30,7 +29,7 @@ class EmojiMemoryGame: ObservableObject {
     
     @Published private var model: MemoryGame<String>
     
-    private var theme: ThemeMemoryGame
+    private var theme: Theme
     
     var themeName: String {
         return theme.name
@@ -59,8 +58,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func restart() {
-        theme = ThemeOptions.themeOptions.randomElement()!
-        theme.content.shuffle()
+        theme = ThemeOptions.themeOptions
         model = EmojiMemoryGame.createMemoryGame(theme: theme)
     }
 }
