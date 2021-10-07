@@ -136,10 +136,6 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
 
 extension Array {
     var oneAndOnly: Element? {
-        if count == 1 {
-            return first
-        } else {
-            return nil
-        }
+        count == 1 ? first : nil
     }
 }

@@ -9,12 +9,13 @@ import Foundation
 
 struct Theme: Identifiable, Codable, Hashable {
     var name: String
-    var content: Array<String>
+    var content: [String]
     var numPairsOfCards: Int
-    var color: String
+    var color: RGBAColor
+
     var id: Int
     
-    init(name: String, content: [String], numPairsOfCards: Int, color: String, id: Int) {
+    init(name: String, content: [String], numPairsOfCards: Int, color: RGBAColor, id: Int) {
         self.name = name
         self.content = content
         self.numPairsOfCards = numPairsOfCards > content.count ? content.count : numPairsOfCards

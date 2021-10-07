@@ -13,30 +13,30 @@ class EmojiMemoryGame: ObservableObject {
 //        let data: Data = emojiCollections.json()
 //        data.write(to: file)
 //    }
+    private(set) var theme: Theme
     
     init(theme: Theme) {
-        theme = ThemeOptions.themeOptions
+        self.theme = theme
         model = EmojiMemoryGame.createMemoryGame(theme: theme)
     }
     
     typealias Card = MemoryGame<String>.Card
     
-    private static func createMemoryGame(theme: Theme) -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: theme.numPairsOfCards) { pairIndex in
-            return theme.content[pairIndex]
+    static func createMemoryGame(theme: Theme) -> MemoryGame<String> {
+        let shuffledItems = theme.content.shuffled()
+        return MemoryGame<String>(numberOfPairsOfCards: theme.numPairsOfCards) { pairIndex in
+            shuffledItems[pairIndex]
         }
     }
     
     @Published private var model: MemoryGame<String>
-    
-    private var theme: Theme
-    
+        
     var themeName: String {
         return theme.name
     }
-    
-    var themeColor: String {
-        return theme.color
+
+    var themeColor: Color {
+        return Color(rgbaColor: theme.color)
     }
     
     var cards: Array<Card> {
@@ -57,8 +57,12 @@ class EmojiMemoryGame: ObservableObject {
         model.shuffle()
     }
     
+    func changeTheme(to theme: Theme) {
+        self.theme = theme
+        model = EmojiMemoryGame.createMemoryGame(theme: theme)
+    }
+    
     func restart() {
-        theme = ThemeOptions.themeOptions
         model = EmojiMemoryGame.createMemoryGame(theme: theme)
     }
 }

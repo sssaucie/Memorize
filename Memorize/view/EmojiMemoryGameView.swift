@@ -72,7 +72,7 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(Color.init(hex: gameViewModel.themeColor))
+        .foregroundColor(Color.init(rgbaColor: gameViewModel.theme.color))
     }
     
     var deckBody: some View {
@@ -85,7 +85,7 @@ struct EmojiMemoryGameView: View {
             }
         }
         .frame(width: CardConstants.undealtWidth, height: CardConstants.undealtHeight)
-        .foregroundColor(Color.init(hex: gameViewModel.themeColor))
+        .foregroundColor(Color.init(rgbaColor: gameViewModel.theme.color))
         .onTapGesture {
             // "deal" cards
             for card in gameViewModel.cards {
@@ -176,11 +176,11 @@ struct EmojiMemoryGameView: View {
 }
 
 // Automated code to populate view for our preview
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        let game = EmojiMemoryGame()
-        game.choose(game.cards.first!)
-        return EmojiMemoryGameView(gameViewModel: game)
-            .preferredColorScheme(.dark)
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let game = EmojiMemoryGame(theme: theme)
+//        game.choose(game.cards.first!)
+//        return EmojiMemoryGameView(gameViewModel: game)
+//            .preferredColorScheme(.dark)
+//    }
+//}

@@ -9,53 +9,66 @@ import SwiftUI
 
 struct ThemeChooser: View {
     
-    @EnvironmentObject var store: ThemeStore
+    @EnvironmentObject var options: ThemeOptions
+    
     @Environment(\.presentationMode) var presentationMode
     
     @State private var editMode: EditMode = .inactive
     
+    @State private var themeToEdit: Theme?
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(store.themes) { theme in
-                    // Ask Brad about theme.id
-                    // Navigate to the GAME duh
-                    NavigationLink(destination: ThemeEditor(theme: $store.themes[theme.id])) {
-                        VStack(alignment: .leading) {
-                            Text(theme.name)
-                            // Add card pairs view
-                            Text(theme.content)
-                        }
-                        .gesture(editMode == .active ? tap : nil)
-                    }
+                ForEach(options.themes) { theme in
+                    themeDescription(of: theme)
                 }
-                .onDelete { indices in
-                    store.themes.remove(atOffsets: indices)
+                .onDelete { indexSet in
+                    options.themes.remove(atOffsets: indexSet)
                 }
                 .onMove { indices, newOffset in
-                    store.themes.move(fromOffsets: indices, toOffset: newOffset)
+                    options.themes.move(fromOffsets: indices, toOffset: newOffset)
                 }
             }
-            .navigationTitle("Manage Themes")
+            .navigationTitle("Memorize")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem {
-                    EditButton()
-                }
+                ToolbarItem { EditButton() }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if presentationMode.wrappedValue.isPresented,
-                       UIDevice.current.userInterfaceIdiom != .pad {
-                        Button("Close") {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
+                    addTheme
                 }
             }
+            .popover(item: $themeToEdit, content: { theme in
+                ThemeEditor(theme: $options.themes[options.themes.firstIndex(where: { $0.id == theme.id })!])
+            })
             .environment(\.editMode, $editMode)
         }
     }
-    var tap: some Gesture {
-        TapGesture().onEnded {  }
+    
+    func themeDescription(of theme: Theme) -> some View {
+        NavigationLink(destination: EmojiMemoryGameView(gameViewModel: EmojiMemoryGame(theme: theme))) {
+            VStack(alignment: .leading) {
+                Text(theme.name.capitalized).font(.title).foregroundColor(Color.init(rgbaColor: theme.color))
+                Text(theme.content.joined())
+            }
+            .gesture(editMode == .active ? editTap(of: theme) : nil)
+        }
+    }
+    
+    var addTheme: some View {
+        Button {
+            options.insertTheme(named: "New", content: [], numPairsOfCards: 0, themeColor: .black)
+            themeToEdit = options.themes.last
+        } label: {
+            Image(systemName: "plus")
+        }
+    }
+    
+    func editTap(of theme: Theme) -> some Gesture {
+        TapGesture (count: 1)
+            .onEnded {
+                themeToEdit = theme
+            }
     }
 }
 
