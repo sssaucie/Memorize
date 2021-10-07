@@ -72,7 +72,7 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(Color.init(rgbaColor: gameViewModel.theme.color))
+        .foregroundColor(gameViewModel.themeColor)
     }
     
     var deckBody: some View {
@@ -85,7 +85,7 @@ struct EmojiMemoryGameView: View {
             }
         }
         .frame(width: CardConstants.undealtWidth, height: CardConstants.undealtHeight)
-        .foregroundColor(Color.init(rgbaColor: gameViewModel.theme.color))
+        .foregroundColor(gameViewModel.themeColor)
         .onTapGesture {
             // "deal" cards
             for card in gameViewModel.cards {
